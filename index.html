@@ -1,0 +1,315 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Shop Bod Gaming — Mua bán Acc Roblox (Demo)</title>
+  <style>
+    :root{--bg:#061122;--card:#081627;--muted:#9aa4b2;--accent:#06b6d4;--accent-2:#7c3aed}
+    *{box-sizing:border-box}body{margin:0;font-family:Inter,system-ui,Segoe UI,Roboto,Arial;background:linear-gradient(180deg,#041026 0%,#071a2a 100%);color:#e6eef6}
+    header{display:flex;justify-content:space-between;align-items:center;padding:12px 18px;border-bottom:1px solid rgba(255,255,255,0.03)}
+    .brand{display:flex;gap:12px;align-items:center}
+    .brand .logo{width:44px;height:44px;border-radius:8px;background:linear-gradient(135deg,#06b6d4,#3b82f6);display:flex;align-items:center;justify-content:center;font-weight:700}
+    nav{display:flex;gap:8px}
+    nav button{background:none;border:1px solid rgba(255,255,255,0.04);color:var(--muted);padding:8px 12px;border-radius:8px;cursor:pointer}
+    main{display:grid;grid-template-columns:300px 1fr;gap:18px;padding:18px}
+    .card{background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));border-radius:12px;padding:12px;border:1px solid rgba(255,255,255,0.03)}
+    .filters{display:flex;flex-direction:column;gap:8px}
+    .filters input,.filters select{width:100%;padding:8px;border-radius:8px;border:1px solid rgba(255,255,255,0.06);background:transparent;color:inherit}
+    .categories{display:flex;flex-direction:column;gap:8px}
+    .cat{display:flex;justify-content:space-between;align-items:center;padding:8px;border-radius:8px;background:rgba(255,255,255,0.01);cursor:pointer}
+    .cat:hover{background:rgba(255,255,255,0.02)}
+    .service-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px}
+    .service{padding:12px;border-radius:10px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.03)}
+    .service h4{margin:0 0 6px 0}
+    .muted{color:var(--muted);font-size:13px}
+    .actions{display:flex;gap:6px;margin-top:10px}
+    .btn{padding:8px 10px;border-radius:8px;border:none;cursor:pointer}
+    .btn-primary{background:var(--accent);color:#022;}
+    .btn-ghost{background:transparent;border:1px solid rgba(255,255,255,0.04);color:var(--muted)}
+    .right-top{display:flex;gap:8px;align-items:center}
+    .wallet{background:linear-gradient(90deg,#093046,#072b3a);padding:8px 12px;border-radius:10px}
+    .modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(4,6,12,0.6);z-index:50}
+    .modal.show{display:flex}
+    .modal .box{width:760px;max-width:95%;background:var(--card);padding:16px;border-radius:12px;border:1px solid rgba(255,255,255,0.04)}
+    .form-row{display:flex;flex-direction:column;gap:6px;margin-bottom:8px}
+    label{font-size:13px;color:var(--muted)}
+    input[type=text],input[type=password],input[type=number],textarea,select{padding:8px;border-radius:8px;border:1px solid rgba(255,255,255,0.06);background:transparent;color:inherit}
+    footer{padding:14px;text-align:center;color:var(--muted);font-size:13px}
+    .badge{background:rgba(255,255,255,0.03);padding:4px 8px;border-radius:999px;font-size:13px}
+    .grid-acc{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px}
+    .acc{padding:12px;border-radius:10px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.03)}
+    .acc img{width:100%;height:140px;object-fit:cover;border-radius:8px}
+    .detail-img{width:100%;height:260px;object-fit:cover;border-radius:8px}
+    .small{font-size:13px}
+    .center{display:flex;justify-content:center}
+    @media (max-width:900px){main{grid-template-columns:1fr} .brand .logo{display:none}}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <div class="logo">RB</div>
+      <div>
+        <div style="font-weight:700">Shop Bod Gaming</div>
+        <div class="muted" style="font-size:13px">Mua bán account Roblox — Demo offline</div>
+      </div>
+    </div>
+    <div class="right-top">
+      <div class="wallet card" id="walletBox">Ví: <span id="walletAmount">0</span> đ</div>
+      <button class="btn btn-ghost" id="btnOpenLogin">Đăng nhập / ĐK</button>
+      <button class="btn btn-ghost" id="btnOpenSeller">Bán acc</button>
+    </div>
+  </header>
+
+  <main>
+    <aside class="card">
+      <h3>Danh mục & Bộ lọc</h3>
+      <div class="filters">
+        <input placeholder="Tìm theo tên acc, mã acc..." id="filterText">
+        <select id="filterGame" style="display:none"></select>
+        <div style="display:flex;gap:8px">
+          <input type="number" id="minPrice" placeholder="Giá từ">
+          <input type="number" id="maxPrice" placeholder="Giá đến">
+        </div>
+        <button class="btn btn-primary" id="btnApplyFilter">Áp dụng</button>
+        <button class="btn btn-ghost" id="btnClearFilter">Bỏ lọc</button>
+      </div>
+
+      <hr style="margin:12px 0;border-color:rgba(255,255,255,0.03)">
+      <h4>Danh mục game</h4>
+      <div class="categories" id="categories"></div>
+
+      <hr style="margin:12px 0;border-color:rgba(255,255,255,0.03)">
+      <h4>Người bán</h4>
+      <div id="sellerPanel" class="muted small">Bạn chưa đăng nhập</div>
+      <div style="margin-top:8px" id="sellerActions"></div>
+    </aside>
+
+    <section>
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+        <h2 id="pageTitle">Trang chủ</h2>
+        <div class="muted">Tổng acc: <span id="totalAcc">0</span></div>
+      </div>
+
+      <div id="contentArea">
+        <!-- Services overview -->
+        <div class="card" id="servicesOverview">
+          <h3>Dịch vụ nổi bật</h3>
+          <div class="service-list" id="serviceList"></div>
+        </div>
+
+        <!-- Subservices / Collections (shown after click category) -->
+        <div class="card" id="collectionArea" style="display:none;margin-top:12px">
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <h3 id="collectionTitle">Khám phá</h3>
+            <div class="muted small">Quay lại: <button class="btn btn-ghost" id="backToHome">Trang chủ</button></div>
+          </div>
+          <div id="collectionList" style="margin-top:12px" class="grid-acc"></div>
+        </div>
+
+        <!-- Acc list (shown after click subservice type) -->
+        <div class="card" id="accListArea" style="display:none;margin-top:12px">
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <h3 id="accListTitle">Danh sách acc</h3>
+            <div class="muted small">Lọc: <button class="btn btn-ghost" id="clearAccFilter">Bỏ</button></div>
+          </div>
+          <div id="accGrid" class="grid-acc" style="margin-top:12px"></div>
+        </div>
+
+        <!-- Detail view -->
+        <div class="card" id="detailArea" style="display:none;margin-top:12px">
+          <div style="display:flex;gap:12px;flex-wrap:wrap">
+            <div style="flex:1;min-width:260px">
+              <img id="detailImg" class="detail-img" src="" alt="">
+            </div>
+            <div style="flex:1;min-width:260px">
+              <h3 id="detailTitle"></h3>
+              <div class="muted small" id="detailSeller"></div>
+              <div style="margin-top:8px;font-weight:800;font-size:20px" id="detailPrice"></div>
+              <div class="muted small" style="margin-top:8px" id="detailDesc"></div>
+              <div style="margin-top:12px;display:flex;gap:8px">
+                <button class="btn btn-primary" id="btnBuyNow">MUA NGAY</button>
+                <button class="btn btn-ghost" id="btnBackToList">Quay lại danh sách</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    Bản demo: Mọi dữ liệu lưu localStorage. Để chuyển sang production, tích hợp API + DB.
+  </footer>
+
+  <!-- Modals (Auth, Sell, Deposit, Checkout) -->
+  <div class="modal" id="modalLogin">
+    <div class="box">
+      <h3>Đăng nhập / Đăng ký</h3>
+      <div style="display:flex;gap:12px">
+        <div style="flex:1">
+          <h4>Đăng nhập</h4>
+          <div class="form-row"><label>Email hoặc Username</label><input id="loginUser" type="text"></div>
+          <div class="form-row"><label>Mật khẩu</label><input id="loginPass" type="password"></div>
+          <div style="display:flex;gap:8px;justify-content:flex-end"><button class="btn btn-ghost" id="btnCloseAuth">Đóng</button><button class="btn btn-primary" id="btnDoLogin">Đăng nhập</button></div>
+        </div>
+        <div style="flex:1">
+          <h4>Đăng ký</h4>
+          <div class="form-row"><label>Username</label><input id="regUser" type="text"></div>
+          <div class="form-row"><label>Email</label><input id="regEmail" type="text"></div>
+          <div class="form-row"><label>Mật khẩu</label><input id="regPass" type="password"></div>
+          <div class="form-row"><label>Xác nhận mật khẩu</label><input id="regPass2" type="password"></div>
+          <div style="display:flex;gap:8px;justify-content:flex-end"><button class="btn btn-ghost" id="btnDoRegister">Đăng ký</button></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" id="modalSeller">
+    <div class="box">
+      <h3>Gửi ký gửi / Bán acc</h3>
+      <div class="form-row"><label>Game / Danh mục</label><input id="sellGame" type="text" placeholder="Ví dụ: Grow a Garden"></div>
+      <div class="form-row"><label>Tiêu đề acc</label><input id="sellTitle" type="text" placeholder="Acc Plant vs Brainrot Random 16k"></div>
+      <div class="form-row"><label>Username Roblox</label><input id="sellRobUser" type="text"></div>
+      <div class="form-row"><label>Password Roblox</label><input id="sellRobPass" type="text"></div>
+      <div class="form-row"><label>Giá bán (VNĐ)</label><input id="sellPrice" type="number"></div>
+      <div class="form-row"><label>Mô tả</label><textarea id="sellDesc" rows="4"></textarea></div>
+      <div style="display:flex;gap:8px;justify-content:flex-end"><button class="btn btn-ghost" id="btnCloseSeller">Đóng</button><button class="btn btn-primary" id="btnSubmitSell">Gửi yêu cầu ký gửi</button></div>
+    </div>
+  </div>
+
+  <div class="modal" id="modalDeposit">
+    <div class="box">
+      <h3>Nạp tiền (demo)</h3>
+      <div class="form-row"><label>Số tiền (VNĐ)</label><input id="depositAmount" type="number" value="10000"></div>
+      <div style="display:flex;gap:8px;justify-content:flex-end"><button class="btn btn-ghost" id="btnCloseDeposit">Đóng</button><button class="btn btn-primary" id="btnDoDeposit">Nạp</button></div>
+    </div>
+  </div>
+
+  <div id="toast" class="card" style="position:fixed;right:16px;bottom:16px;display:none;padding:10px;border-radius:8px"></div>
+
+  <script>
+    // ----- Utils -----
+    const $ = s => document.querySelector(s);
+    const qs = s => document.querySelectorAll(s);
+    function toast(msg, t=2200){ const el=$('#toast'); el.textContent=msg; el.style.display='block'; setTimeout(()=>el.style.display='none', t); }
+
+    // ----- Storage keys -----
+    const LS_USERS='rb_users_v2';
+    const LS_SERVICES='rb_services_v1'; // categories + collections
+    const LS_ACCS='rb_accs_v2';
+    const LS_SESSION='rb_session_v2';
+
+    // ----- Seed data -----
+    function seed(){
+      if(!localStorage.getItem(LS_USERS)){
+        const users=[{username:'admin',email:'admin@rb',password:'admin123',isAdmin:true,wallet:0},{username:'seller1',email:'s1@rb',password:'seller1',isAdmin:false,wallet:0},{username:'buyer1',email:'b1@rb',password:'buyer1',isAdmin:false,wallet:200000}];
+        localStorage.setItem(LS_USERS,JSON.stringify(users));
+      }
+      if(!localStorage.getItem(LS_SERVICES)){
+        const services=[
+          {id:'s1',name:'Grow A Garden',collections:[{id:'c1',title:'Acc Có 1 Cây Secret 10K',available:46,sold:154},{id:'c2',title:'Acc Plant vs Brainrot Random 16k',available:11,sold:129}]},
+          {id:'s2',name:'Blox Fruits',collections:[{id:'c3',title:'Acc Full Haki 250k',available:12,sold:74},{id:'c4',title:'Acc Fruit Random 80k',available:40,sold:210}]},
+          {id:'s3',name:'Adopt Me',collections:[{id:'c5',title:'Acc Pet Hiếm',available:21,sold:44}]}
+        ];
+        localStorage.setItem(LS_SERVICES,JSON.stringify(services));
+      }
+      if(!localStorage.getItem(LS_ACCS)){
+        // create multiple accs per collection
+        const services = JSON.parse(localStorage.getItem(LS_SERVICES));
+        const accs=[];
+        function mkAcc(col, idx){ return {id:'A'+Math.random().toString(36).slice(2,9),collectionId:col.id,collectionTitle:col.title,gameName:services.find(s=>s.collections.some(c=>c.id===col.id)).name,title:col.title+' #' + (idx+1),price:10000 + Math.round(Math.random()*200000),desc:'Mô tả ngắn cho '+col.title+' #'+(idx+1),images:['https://picsum.photos/seed/'+Math.random().toString(36).slice(2,6)+'/400/240'],seller:'seller1',status:'approved',created:Date.now()-Math.floor(Math.random()*10000000)}
+        }
+        services.forEach(s=>s.collections.forEach(col=>{ const count = Math.max(3,Math.min(col.available,6)); for(let i=0;i<count;i++) accs.push(mkAcc(col,i)) }))
+        localStorage.setItem(LS_ACCS,JSON.stringify(accs));
+      }
+    }
+
+    // ----- Load / Save -----
+    function loadUsers(){return JSON.parse(localStorage.getItem(LS_USERS) || '[]')}
+    function saveUsers(u){localStorage.setItem(LS_USERS,JSON.stringify(u))}
+    function loadServices(){return JSON.parse(localStorage.getItem(LS_SERVICES) || '[]')}
+    function saveServices(s){localStorage.setItem(LS_SERVICES,JSON.stringify(s))}
+    function loadAccs(){return JSON.parse(localStorage.getItem(LS_ACCS) || '[]')}
+    function saveAccs(a){localStorage.setItem(LS_ACCS,JSON.stringify(a))}
+    function setSession(u){localStorage.setItem(LS_SESSION,JSON.stringify(u))}
+    function getSession(){return JSON.parse(localStorage.getItem(LS_SESSION) || 'null')}
+    function clearSession(){localStorage.removeItem(LS_SESSION)}
+
+    // ----- Render categories & overview -----
+    function renderCategories(){ const cats = loadServices(); const el=$('#categories'); el.innerHTML=''; cats.forEach(s=>{ const totalAvailable = s.collections.reduce((a,c)=>a+c.available,0); const totalSold = s.collections.reduce((a,c)=>a+c.sold,0); const div=document.createElement('div'); div.className='cat'; div.innerHTML=`<div><strong>${s.name}</strong><div class="muted small">Sẵn có: ${totalAvailable} • Đã bán: ${totalSold}</div></div><div><button class="btn btn-ghost">Khám phá</button></div>`; div.onclick=()=>openCategory(s.id); el.appendChild(div) }) }
+
+    function renderServicesOverview(){ const services=loadServices(); const el=$('#serviceList'); el.innerHTML=''; services.forEach(s=>{ const totalAvailable = s.collections.reduce((a,c)=>a+c.available,0); const totalSold = s.collections.reduce((a,c)=>a+c.sold,0); const card=document.createElement('div'); card.className='service'; card.innerHTML=`<h4>${s.name}</h4><div class="muted small">Sẵn có: ${totalAvailable}</div><div class="muted small">Đã bán: ${totalSold}</div><div style="margin-top:8px"><button class="btn btn-primary">Khám phá</button></div>`; card.querySelector('button').onclick=()=>openCategory(s.id); el.appendChild(card) }) }
+
+    // ----- Category -> show collections -----
+    function openCategory(serviceId){ const services = loadServices(); const s = services.find(x=>x.id===serviceId); if(!s) return; $('#pageTitle').textContent = 'Khám phá: '+s.name; $('#servicesOverview').style.display='none'; $('#collectionArea').style.display='block'; $('#accListArea').style.display='none'; $('#detailArea').style.display='none'; $('#collectionTitle').textContent = 'Khám phá — '+s.name; const list = $('#collectionList'); list.innerHTML=''; s.collections.forEach(col=>{ const div=document.createElement('div'); div.className='acc'; div.innerHTML=`<h4>${col.title}</h4><div class="muted small">Sẵn có: ${col.available}</div><div class="muted small">Đã bán: ${col.sold}</div><div style="margin-top:8px"><button class="btn btn-primary">Xem acc</button></div>`; div.querySelector('button').onclick=()=>openCollection(col.id); list.appendChild(div) }) }
+
+    document.getElementById('backToHome').onclick = ()=>{ $('#servicesOverview').style.display='block'; $('#collectionArea').style.display='none'; $('#accListArea').style.display='none'; $('#detailArea').style.display='none'; $('#pageTitle').textContent='Trang chủ'; }
+
+    // ----- Collection -> list accs -----
+    function openCollection(collectionId){ const accs = loadAccs().filter(a=>a.collectionId===collectionId); $('#pageTitle').textContent = 'Danh sách acc'; $('#servicesOverview').style.display='none'; $('#collectionArea').style.display='none'; $('#accListArea').style.display='block'; $('#detailArea').style.display='none'; $('#accListTitle').textContent = 'Acc thuộc nhóm'; const grid=$('#accGrid'); grid.innerHTML=''; accs.forEach(a=>{ const d=document.createElement('div'); d.className='acc'; d.innerHTML=`<img src="${a.images[0]}" alt=""><h4>${a.title}</h4><div class="muted small">ID: ${a.id}</div><div style="margin-top:6px;font-weight:700">${formatMoney(a.price)} đ</div><div class="actions"><button class="btn btn-primary">Xem chi tiết</button></div>`; d.querySelector('button').onclick=()=>openDetail(a.id); grid.appendChild(d) }); $('#totalAcc').textContent = accs.length }
+
+    // ----- Detail -----
+    let currentDetail=null;
+    function openDetail(accId){ const a = loadAccs().find(x=>x.id===accId); if(!a) return; currentDetail=a; $('#detailImg').src = a.images[0]||'https://picsum.photos/400/240'; $('#detailTitle').textContent = a.title + ' — ' + a.gameName; $('#detailSeller').textContent = 'Người bán: '+a.seller + ' • Mã: '+a.id; $('#detailPrice').textContent = formatMoney(a.price)+' đ'; $('#detailDesc').textContent = a.desc; $('#servicesOverview').style.display='none'; $('#collectionArea').style.display='none'; $('#accListArea').style.display='none'; $('#detailArea').style.display='block'; $('#pageTitle').textContent='Chi tiết acc' }
+    document.getElementById('btnBackToList').onclick = ()=>{ $('#detailArea').style.display='none'; $('#accListArea').style.display='block'; $('#pageTitle').textContent='Danh sách acc' }
+
+    // ----- Buy flow -----
+    document.getElementById('btnBuyNow').onclick = ()=>{ const s=getSession(); if(!s){ toast('Vui lòng đăng nhập để mua'); openModal('#modalLogin'); return } const price=currentDetail.price; const users=loadUsers(); const u=users.find(x=>x.username===s.username); if(u.wallet < price){ toast('Ví không đủ. Vui lòng nạp.'); openModal('#modalDeposit'); return } // trừ
+      u.wallet -= price; saveUsers(users); setSession(u); // chuyển cho seller
+      const seller = users.find(x=>x.username===currentDetail.seller);
+      if(seller){ // fee 3%
+        const fee=3; const sellerShare = Math.round(price*(100-fee)/100); seller.wallet = (seller.wallet||0)+sellerShare; saveUsers(users);
+        // tăng sold count in service collections
+        const services = loadServices(); services.forEach(sv=>sv.collections.forEach(c=>{ if(c.id===currentDetail.collectionId){ c.available = Math.max(0,c.available-1); c.sold = (c.sold||0)+1 } })); saveServices(services);
+      }
+      // remove acc from listing
+      let accs = loadAccs(); accs = accs.filter(x=>x.id!==currentDetail.id); saveAccs(accs); renderAfterChange(); toast('Mua thành công!') }
+
+    // ----- Auth / Register -----
+    function openModal(id){ $(id).classList.add('show') }
+    function closeModal(id){ $(id).classList.remove('show') }
+    document.getElementById('btnOpenLogin').onclick = ()=>openModal('#modalLogin');
+    document.getElementById('btnCloseAuth').onclick = ()=>closeModal('#modalLogin');
+    document.getElementById('btnDoLogin').onclick = ()=>{ const u=document.getElementById('loginUser').value.trim(); const p=document.getElementById('loginPass').value; const users=loadUsers(); const user = users.find(x=> (x.username===u || x.email===u) && x.password===p ); if(!user){ toast('Sai thông tin đăng nhập'); return } setSession(user); renderSession(); closeModal('#modalLogin'); toast('Đăng nhập thành công') }
+    document.getElementById('btnDoRegister').onclick = ()=>{ const u=document.getElementById('regUser').value.trim(); const e=document.getElementById('regEmail').value.trim(); const p=document.getElementById('regPass').value; const p2=document.getElementById('regPass2').value; if(!u||!e||!p||!p2){ toast('Nhập đầy đủ thông tin'); return } if(p!==p2){ toast('Mật khẩu không khớp'); return } const users=loadUsers(); if(users.find(x=>x.username===u||x.email===e)){ toast('Username hoặc email đã tồn tại'); return } users.push({username:u,email:e,password:p,isAdmin:false,wallet:0}); saveUsers(users); toast('Đăng ký thành công — đăng nhập ngay'); setSession({username:u,email:e,isAdmin:false,wallet:0}); renderSession(); closeModal('#modalLogin') }
+
+    // ----- Sell (consignment) -----
+    document.getElementById('btnOpenSeller').onclick = ()=>{ const s=getSession(); if(!s){ toast('Vui lòng đăng nhập để bán'); openModal('#modalLogin'); return } openModal('#modalSeller'); }
+    document.getElementById('btnCloseSeller').onclick = ()=>closeModal('#modalSeller');
+    document.getElementById('btnSubmitSell').onclick = ()=>{ const s=getSession(); if(!s){ toast('Đăng nhập đã bị mất'); closeModal('#modalSeller'); return } const game=document.getElementById('sellGame').value.trim(); const title=document.getElementById('sellTitle').value.trim(); const ruser=document.getElementById('sellRobUser').value.trim(); const rpass=document.getElementById('sellRobPass').value.trim(); const price=Number(document.getElementById('sellPrice').value||0); const desc=document.getElementById('sellDesc').value.trim(); if(!game||!title||!ruser||!rpass||!price){ toast('Nhập đủ thông tin'); return }
+      // add to services if new game
+      let services=loadServices(); let svc = services.find(x=>x.name.toLowerCase()===game.toLowerCase()); if(!svc){ svc = {id:'s'+Math.random().toString(36).slice(2,6),name:game,collections:[]}; services.push(svc); }
+      // create collection for title or add to existing
+      let col = svc.collections.find(c=>c.title===title); if(!col){ col = {id:'c'+Math.random().toString(36).slice(2,6),title,available:1,sold:0}; svc.collections.push(col); } else col.available +=1;
+      saveServices(services);
+      // add acc as pending (auto-approved for demo)
+      const accs=loadAccs(); accs.push({id:'A'+Math.random().toString(36).slice(2,9),collectionId:col.id,collectionTitle:col.title,gameName:svc.name,title:col.title+' #'+(col.available),price,desc,images:['https://picsum.photos/seed/'+Math.random().toString(36).slice(2,6)+'/400/240'],seller:s.username,status:'approved',created:Date.now()}); saveAccs(accs);
+      closeModal('#modalSeller'); renderAfterChange(); toast('Gửi ký gửi thành công — Admin sẽ duyệt (demo auto duyệt)') }
+
+    // ----- Deposit demo -----
+    document.getElementById('btnCloseDeposit').onclick = ()=>closeModal('#modalDeposit');
+    document.getElementById('btnDoDeposit').onclick = ()=>{ const amt=Number(document.getElementById('depositAmount').value||0); if(!amt||amt<=0){ toast('Số tiền không hợp lệ'); return } const s=getSession(); if(!s){ toast('Vui lòng đăng nhập'); return } const users=loadUsers(); const u=users.find(x=>x.username===s.username); u.wallet = (u.wallet||0)+amt; saveUsers(users); setSession(u); renderSession(); closeModal('#modalDeposit'); toast('Nạp thành công: '+formatMoney(amt)+' đ') }
+
+    // ----- Session rendering -----
+    function renderSession(){ const s=getSession(); if(s){ $('#walletAmount').textContent = formatMoney(s.wallet||0); $('#btnOpenLogin').textContent = 'Tài khoản: '+s.username; $('#sellerPanel').textContent = 'Đang: '+s.username; $('#sellerActions').innerHTML = `<div style="margin-top:8px"><button class="btn btn-primary" id="btnOpenDeposit">Nạp tiền</button> <button class="btn btn-ghost" id="btnLogout">Đăng xuất</button></div>`; setTimeout(()=>{ $('#btnOpenDeposit').onclick = ()=>openModal('#modalDeposit'); $('#btnLogout').onclick = logout; },50); } else { $('#walletAmount').textContent='0'; $('#btnOpenLogin').textContent='Đăng nhập / ĐK'; $('#sellerPanel').textContent='Bạn chưa đăng nhập'; $('#sellerActions').innerHTML=''; } renderAdminPanel() }
+    function logout(){ clearSession(); renderSession(); toast('Đã đăng xuất') }
+
+    // ----- Admin panel simple (show only if admin) -----
+    function renderAdminPanel(){ const s=getSession(); /* for demo admin actions can be added later */ }
+
+    // ----- Helpers -----
+    function formatMoney(n){ return (Number(n)||0).toLocaleString('vi-VN') }
+    function renderAfterChange(){ renderServicesOverview(); renderCategories(); const page = $('#pageTitle').textContent; if(page.includes('Danh sách') || page==='Trang chủ'){ /* refresh grid if visible */ const accGrid=$('#accGrid'); if(accGrid) accGrid.innerHTML=''; } $('#totalAcc').textContent = loadAccs().length }
+
+    // ----- Init -----
+    seed(); renderServicesOverview(); renderCategories(); renderAfterChange(); renderSession();
+
+    // ----- Expose some helpers to window for debugging -----
+    window._rb = {loadUsers,loadServices,loadAccs,saveAccs,saveServices,setSession,getSession,clearSession}
+
+  </script>
+</body>
+</html>
